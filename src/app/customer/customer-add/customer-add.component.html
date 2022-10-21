@@ -1,0 +1,86 @@
+<div class="container mt-4">
+    <h4 class="title">Agregar Cliente</h4>
+
+    <div class="row">
+
+        <div class="col-sm-6" style="display: flex; align-self: center;">
+            <div class="card">
+                <div class="card-body w-75 align-self-center">
+                    <img [src]="profileImage" class="img-fluid rounded-start">
+                    <input type="file" accept="image/*" (change)="selectFile($event)" />
+                </div>
+                <div *ngIf="currentFile && progress" class="progress my-3">
+                    <div
+                        class="progress-bar progress-bar-info"
+                        role="progressbar"
+                        attr.aria-valuenow="{{ progress }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        [ngStyle]="{ width: progress + '%' }">
+                        {{ progress }}%
+                    </div>
+                </div>                
+                <div *ngIf="message" class="alert alert-secondary" role="alert">
+                    {{ message }}
+                </div>                
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+
+                    <form [formGroup]="customerForm" (ngSubmit)="save(customerForm)"  >
+                        <div class="mb-3 ">
+                            <label for="nameInput" class="form-label">Nombre</label>
+                            <input type="text" id="nameInput" formControlName="name" class="form-control" >
+                            <div class="error-message" *ngIf="customerForm.get('name')?.invalid && (customerForm.get('name')?.dirty || customerForm.get('name')?.touched)">
+                                <div *ngIf="customerForm.get('name')?.errors?.['required']">
+                                    Ingresar un nombre válido
+                                </div>            
+                            </div>
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="jobTitleInput" class="form-label">Dirección</label>
+                            <input type="text" id="addressInput" formControlName="address" class="form-control" >
+                            <div class="error-message" *ngIf="customerForm.get('address')?.invalid && (customerForm.get('address')?.dirty || customerForm.get('address')?.touched)">
+                                <div *ngIf="customerForm.get('address')?.errors?.['required']">
+                                    Ingresar una dirección válida
+                                </div>            
+                            </div>
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="nameInput" class="form-label">Email</label>
+                            <input type="email" id="emailInput" formControlName="email" class="form-control" >
+                            <div class="error-message" *ngIf="customerForm.get('email')?.invalid && (customerForm.get('email')?.dirty || customerForm.get('email')?.touched)">
+                                <div *ngIf="customerForm.get('email')?.invalid">
+                                    Ingresar una email válido
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="phoneInput" class="form-label">Teléfono</label>
+                            <input type="text" id="phoneInput" formControlName="phone" class="form-control" >
+                        </div>
+                        <button type="submit" class="btn bd-indigo-200 me-2" [disabled]="customerForm.invalid">Guardar</button>
+                        <button type="button" class="btn bd-indigo-200" (click)="cancel()" >Volver</button>
+                    </form>            
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+  <!-- Modal -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Registro agregado exitosamente</h4>      
+    </div>
+    <div class="modal-footer">      
+      <button type="button" class="btn bd-indigo-200" (click)="modal.close('close')">Cerrar</button>
+    </div>
+  </ng-template>

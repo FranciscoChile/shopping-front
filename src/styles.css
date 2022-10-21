@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.bd-indigo-200 {
+    color:#000;
+    background-color:#c29ffa
+}
+
+.bd-indigo-200:hover {
+    color:#000;
+    background-color: #a370f7;
+}
+
+.bd-indigo-200:disabled {
+    color:#fff;
+    background-color: #e0cffc;
+    border-color: #e0cffc;
+    pointer-events: none;
+}
+
+
