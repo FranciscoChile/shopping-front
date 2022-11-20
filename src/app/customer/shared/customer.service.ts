@@ -12,7 +12,12 @@ export class CustomerService {
 
   private apiUrl = environment.apiUrl + "/customer";
   httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
+    headers: new HttpHeaders(
+      {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache'
+      })
   };
 
   constructor(private http: HttpClient) { }
@@ -42,7 +47,7 @@ export class CustomerService {
     
   }
 
-  delete(id: string): Observable<void> {
+  delete(id: string): Observable<any> {
     return this.http.delete<void>(this.apiUrl + "/" + id, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)

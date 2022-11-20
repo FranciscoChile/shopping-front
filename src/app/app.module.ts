@@ -16,21 +16,23 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductAddComponent } from './product/product-add/product-add.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { SellingListComponent } from './selling/selling-list/selling-list.component';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
+  exports: [ NzMessageModule ],
   declarations: [
     AppComponent,
     CustomerAddComponent,
     CustomerEditComponent,
     CustomerListComponent,
-    SpinnerComponent,
     ProductAddComponent,
     ProductEditComponent,
     ProductListComponent,
@@ -40,11 +42,13 @@ import { SellingListComponent } from './selling/selling-list/selling-list.compon
     BrowserModule, FormsModule, 
     CustomerRoutingModule, ProductRoutingModule, SellingRoutingModule,
     ReactiveFormsModule, NgxPaginationModule, FlexLayoutModule, Ng2SearchPipeModule, 
-    HttpClientModule, NgbModule
+    HttpClientModule, NgbModule, BrowserAnimationsModule
   ],
   providers: [
     {
-      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+      provide: HTTP_INTERCEPTORS, 
+      useClass: LoadingInterceptor, 
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

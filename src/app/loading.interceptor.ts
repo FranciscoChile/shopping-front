@@ -3,33 +3,36 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { LoaderService } from './loader.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
 
-  private totalRequests = 0;
+  private countRequest = 0;
+  private idMessage: string | undefined;
+  constructor(
+    public message: NzMessageService
+  ) {}
 
-    constructor(
-      private loadingService: LoaderService
-    ) {}
-
-    intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-      console.log('caught')
-      this.totalRequests++;
-      this.loadingService.setLoading(true);
-      return next.handle(request).pipe(
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    if (!this.countRequest) {
+      this.idMessage = this.message
+         .loading('Cargando...', { nzDuration: 0 }).messageId;
+    }
+    this.countRequest++;
+    return next.handle(request)
+      .pipe(
         finalize(() => {
-          this.totalRequests--;
-          if (this.totalRequests == 0) {
-            this.loadingService.setLoading(false);
+          this.countRequest--;
+          if (!this.countRequest) {
+            this.message.remove(this.idMessage);
           }
         })
       );
-    }
+  }
     
 }

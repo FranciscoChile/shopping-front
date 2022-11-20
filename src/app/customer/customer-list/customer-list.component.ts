@@ -18,24 +18,28 @@ export class CustomerListComponent implements OnInit {
 
   page: number = 1;
   count: number = 0;
-  tableSize: number = 12;
+  tableSize: number = 15;
 
   filter = {};
   idModal = '';
+
+  linkPicture: any;
+  timeStamp: any;
 
   constructor(
     private api: CustomerService,
     private modalService: NgbModal
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.findCustomers();
   }
 
-  findCustomers() {
+  findCustomers() {    
 
     this.api.findAll().subscribe({
       next: (data) => {
+        this.customers=[];
         this.customers = data;
       },
       error: (e) => {
@@ -67,7 +71,9 @@ export class CustomerListComponent implements OnInit {
   open(content:any, id: string) {
     this.idModal = id;
     this.modalService.open(content).result.then((result) => {
-      if (result == 'delete') this.delete();
+      if (result == 'delete') {
+        this.delete();
+      }
     });
   } 
 

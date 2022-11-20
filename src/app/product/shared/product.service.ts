@@ -17,6 +17,13 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  findById (id: string): Observable<Product> {
+    return this.http.get<Product>(this.apiUrl + "/" + id, this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
   findAll (): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl, this.httpOptions)
       .pipe(
@@ -29,6 +36,17 @@ export class ProductService {
     .pipe(
       catchError(this.errorHandler)
     )
+  }
+
+  save(product: any): Observable<HttpEvent<any>> {
+
+    const req = new HttpRequest('POST', this.apiUrl + "/save-multiple-images", product, {
+      reportProgress: true,
+      responseType: 'json',
+    });
+
+    return this.http.request(req);
+    
   }
 
   errorHandler(error: { error: { message: string; }; status: any; message: any; }) {

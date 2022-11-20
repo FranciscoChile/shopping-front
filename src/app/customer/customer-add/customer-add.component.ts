@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from '../shared/customer.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-customer-add',
@@ -27,16 +27,14 @@ export class CustomerAddComponent implements OnInit {
     private modalService: NgbModal
   ) {}
 
-  customerForm = this.fb.group({
+  mainform = this.fb.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.email, Validators.required]],
     phone: [''],
-    address: ['', [Validators.required]],
-    profileImg: ['']
+    address: ['', [Validators.required]]
   })
 
-  ngOnInit(): void {
-    this.profileImage = "../../assets/profile-fake.png";
+  ngOnInit(): void {    
   }
 
   save(form : FormGroup) {
@@ -46,7 +44,6 @@ export class CustomerAddComponent implements OnInit {
       phone: form.value.phone,
       address: form.value.address,
       email: form.value.email,
-      profileImg: form.value.profileImg,
       city: '',
       country: '',
       active: true
@@ -64,16 +61,13 @@ export class CustomerAddComponent implements OnInit {
           } else if (event instanceof HttpResponse) {
 
             formData = new FormData();
-            this.customerForm.reset();
-            
-            this.modalService.open(this.content).result.then((result) => {
-              if (result == 'close') this.cancel();
-            });
-            
-//            var p = event.body.profileImg;
-//            var splitTest = p.split('\\').pop()?.split('/').pop();          
-//            this.message = splitTest as unknown as string;
-//            this.message = "Imagen subida en forma exitosa: " + this.message;
+            this.mainform.reset();
+
+            this.selectedFiles = undefined;
+            this.currentFile = undefined;
+            this.profileImage = '';
+
+            this.modalService.open(this.content);            
           }
         },
         error: (e) => {

@@ -5,10 +5,21 @@
 
         <div class="col-sm-6" style="display: flex; align-self: center;">
             <div class="card">
-                <div class="card-body w-75 align-self-center">
-                    <img [src]="profileImage" class="img-fluid rounded-start">
+                <div class="card-body w-50 align-self-center">
+                    <img [src]="profileImage" class="img-fluid rounded-start" style="height: 250px;">
                     <input type="file" accept="image/*" (change)="selectFile($event)" />                    
                 </div>
+                <div *ngIf="currentFile && progress" class="progress my-3">
+                    <div
+                        class="progress-bar progress-bar-info"
+                        role="progressbar"
+                        attr.aria-valuenow="{{ progress }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        [ngStyle]="{ width: progress + '%' }">
+                        {{ progress }}%
+                    </div>
+                </div>                  
             </div>
         </div>
 

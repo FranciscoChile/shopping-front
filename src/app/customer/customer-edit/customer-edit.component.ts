@@ -1,3 +1,4 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -56,10 +57,15 @@ export class CustomerEditComponent implements OnInit {
     if (this.currentFile) formData.append("image",this.currentFile);
 
       this.api.save(formData).subscribe({
-        next: (data) => {
-          this.router.navigate(['customer/list']);
+        next: (event: any) => {
+          if (event.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round((100 * event.loaded) / event.total);
+          } else if (event instanceof HttpResponse) {
+            this.router.navigate(['customer/list']);
+          }                    
         },
         error: (e) => {
+          this.progress = 0;
           throw new Error('Error cargando información');
         }
       });

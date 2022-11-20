@@ -1,1 +1,88 @@
-<p>product-add works!</p>
+<div class="container mt-4">
+    <h4 class="title">Agregar Producto</h4>
+
+    <div class="row">
+
+        <div class="col-sm-6" style="display: flex; align-self: center; justify-content: center;">
+            <div class="card">
+                <div class="card-body w-50 align-self-center">
+                    <img [src]="profileImage" class="img-fluid rounded-start" style="height: 250px;">
+                    <input #imageInput type="file" accept="image/*" (change)="selectFile($event)" />
+                </div>
+                <div *ngIf="currentFile && progress" class="progress my-3">
+                    <div
+                        class="progress-bar progress-bar-info"
+                        role="progressbar"
+                        attr.aria-valuenow="{{ progress }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        [ngStyle]="{ width: progress + '%' }">
+                        {{ progress }}%
+                    </div>
+                </div>             
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+
+                    <form [formGroup]="mainform" (ngSubmit)="save(mainform)"  >
+                        <div class="mb-3 ">
+                            <label for="nameInput" class="form-label">Nombre</label>
+                            <input type="text" id="nameInput" formControlName="name" class="form-control" >
+                            <div class="error-message" *ngIf="mainform.get('name')?.invalid && (mainform.get('name')?.dirty || mainform.get('name')?.touched)">
+                                <div *ngIf="mainform.get('name')?.errors?.['required']">
+                                    Ingresar un nombre válido
+                                </div>            
+                            </div>
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="jobTitleInput" class="form-label">SKU</label>
+                            <input type="text" id="skuInput" formControlName="sku" class="form-control" >
+                            <div class="error-message" *ngIf="mainform.get('sku')?.invalid && (mainform.get('sku')?.dirty || mainform.get('sku')?.touched)">
+                                <div *ngIf="mainform.get('sku')?.errors?.['required']">
+                                    Ingresar un SKU válida
+                                </div>            
+                            </div>
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="nameInput" class="form-label">Precio Lista</label>
+                            <input type="text" id="priceListInput" formControlName="priceList" class="form-control" >
+                            <div class="error-message" *ngIf="mainform.get('priceList')?.invalid && (mainform.get('priceList')?.dirty || mainform.get('priceList')?.touched)">
+                                <div *ngIf="mainform.get('priceList')?.invalid">
+                                    Ingresar un precio lista válido
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 ">
+                            <label for="phoneInput" class="form-label">Precio Venta</label>
+                            <input type="text" id="priceSellInput" formControlName="priceSell" class="form-control" >
+                            <div class="error-message" *ngIf="mainform.get('priceSell')?.invalid && (mainform.get('priceSell')?.dirty || mainform.get('priceSell')?.touched)">
+                                <div *ngIf="mainform.get('priceSell')?.invalid">
+                                    Ingresar un precio venta válido
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn bd-indigo-200 me-2" [disabled]="mainform.invalid">Guardar</button>
+                        <button type="button" class="btn bd-indigo-200" (click)="cancel()" >Volver</button>
+                    </form>            
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+  <!-- Modal -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Registro agregado exitosamente</h4>      
+    </div>
+    <div class="modal-footer">      
+      <button type="button" class="btn bd-indigo-200" (click)="modal.close('close')">Cerrar</button>
+    </div>
+  </ng-template>

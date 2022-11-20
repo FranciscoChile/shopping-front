@@ -9,4 +9,5 @@ export class Product {
     category!: string;
     active!: boolean;
     dateCreation!: Date;
+    profileImg!: string;
 }
