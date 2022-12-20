@@ -1,4 +1,4 @@
-export class Product {
+export class CartItem {
     id!: string;
     sku!: string;
     name!: string;
@@ -10,4 +10,6 @@ export class Product {
     active!: boolean;
     dateCreation!: Date;
     imageUrl!: string;
+    quantity!: number;
+    subTotal!: number;
 }

@@ -17,11 +17,6 @@ const routes: Routes = [
     path: 'customer/edit/:id',
     component: CustomerEditComponent
   },
-  {
-    path: 'customer',
-    redirectTo: 'customer/list',
-    pathMatch: 'full'
-  },
 
 ];
 

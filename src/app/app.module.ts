@@ -16,7 +16,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoadingInterceptor } from './loading.interceptor';
+import { LoadingInterceptor } from './loading/loading.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductAddComponent } from './product/product-add/product-add.component';
 import { ProductEditComponent } from './product/product-edit/product-edit.component';
@@ -24,6 +24,7 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { SellingListComponent } from './selling/selling-list/selling-list.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CartListComponent } from './selling/cart-list/cart-list.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProductAddComponent,
     ProductEditComponent,
     ProductListComponent,
-    SellingListComponent
+    SellingListComponent,
+    CartListComponent
   ],
   imports: [
     BrowserModule, FormsModule, 

@@ -1,16 +1,26 @@
-  <div class="container mt-5 mb-4">
-    <div class="form-group">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Search..."
-        [(ngModel)]="search"
-      />
+<div class="container-fluid mb-4" style="width: 95%;">
+
+  <div class="d-flex flex-row mb-3 justify-content-between">
+    <div class="p-2 fs-3">Tienda</div>
+    <div class="p-2 w-75">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search..."
+          [(ngModel)]="search"
+        />
+      </div>
+    </div>
+    <div class="p-2">
+      <button type="button" class="btn bd-indigo-200 me-2" [routerLink]="['/cart']" >
+        <i class="bi bi-cart" style="font-size: 18px; color: black"></i>{{cartItems.length}}
+      </button>  
     </div>
   </div>
   
-  <div class="container mb-4">
-      <div fxLayout="row wrap" fxLayoutGap="10px grid">
+
+  <div fxLayout="row wrap" fxLayoutGap="10px grid">
         <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" 
         *ngFor="let c of products | filter : search | paginate
           : {
@@ -20,33 +30,30 @@
           };">
     
           <div class="card" >     
-            <img [src]="c.profileImg" style="height: 180px;">                 
+            <img [src]="c.imageUrl" style="height: 180px;">                 
             <div class="card-body p-2">
               <h5 class="titleh5 mb-0">{{c.name}}</h5>
-              <p class="card-text mb-0"><small class="text-muted">Precio: {{c.priceList}}</small></p>
+              <p class="card-text mb-0"><small class="text-muted">Precio: {{c.priceSell}}</small></p>
             </div>
-            <div class="card-footer">
-              <button type="button" class="btn bd-indigo-200 me-2" (click)="open(mymodal, c.id)" >
-                <i class="bi bi-trash" style="font-size: 20px; color: black"></i>              
-              </button>            
-              <button type="button" class="btn bd-indigo-200" [routerLink]="['/product/edit/', c.id]">
-                <i class="bi bi-pencil" style="font-size: 20px; color: black"></i>              
-              </button>
+            <div class="card-footer text-center">
+                <button type="button" class="btn bd-indigo-200 me-2" (click)="addToCart(c)" >
+                    Agregar al carrito
+                </button> 
             </div>
         
           </div>
     
         </div>
       </div>
-    </div>
+  </div>
     
-    <div class="d-flex justify-content-center">
-      <pagination-controls
-        class="my-pagination"
-        previousLabel="Anterior"
-        nextLabel="Siguiente"
-        (pageChange)="onTableDataChange($event)"
-      >
-      </pagination-controls>
-    </div>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      class="my-pagination"
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
   

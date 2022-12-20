@@ -6,7 +6,7 @@
         <div class="col-sm-6" style="display: flex; align-self: center; justify-content: center;">
             <div class="card">
                 <div class="card-body w-50 align-self-center">
-                    <img [src]="profileImage" class="img-fluid rounded-start" style="height: 250px;">
+                    <img [src]="imageUrl" class="img-fluid rounded-start" style="height: 250px;">
                     <input #imageInput type="file" accept="image/*" (change)="selectFile($event)" />
                 </div>
                 <div *ngIf="currentFile && progress" class="progress my-3">

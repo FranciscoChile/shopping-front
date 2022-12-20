@@ -19,7 +19,7 @@ export class ProductEditComponent implements OnInit {
   currentFile?: File;
   progress = 0;
   message = '';
-  profileImage = '';
+  imageUrl = '';
   
   constructor(
     private fb: FormBuilder,
@@ -34,7 +34,7 @@ export class ProductEditComponent implements OnInit {
     sku: ['', [Validators.required]],
     priceList: [0, [Validators.required]],
     priceSell: [0, [Validators.required]],
-    profileImg: ['']
+    imageUrl: ['']
   })
   
   ngOnInit(): void {
@@ -45,9 +45,9 @@ export class ProductEditComponent implements OnInit {
     this.api.findById(id).subscribe({
       next: (data) => {
         
-        this.profileImage = data.profileImg;
-        if (!this.profileImage) {
-          this.profileImage = "../../assets/profile-fake.png";
+        this.imageUrl = data.imageUrl;
+        if (!this.imageUrl) {
+          this.imageUrl = "../../assets/profile-fake.png";
         }
 
         this.mainform.setValue({
@@ -56,7 +56,7 @@ export class ProductEditComponent implements OnInit {
           sku: data.sku,
           priceList: data.priceList,
           priceSell: data.priceSell,
-          profileImg: data.profileImg
+          imageUrl: data.imageUrl
         });
 
       },
@@ -73,7 +73,8 @@ export class ProductEditComponent implements OnInit {
       name: form.value.name,
       sku: form.value.sku,
       priceList: form.value.priceList,
-      priceSell: form.value.priceSell
+      priceSell: form.value.priceSell,
+      imageUrl: form.value.imageUrl
     }
 
     var formData: any = new FormData();
@@ -115,7 +116,7 @@ export class ProductEditComponent implements OnInit {
         const reader = new FileReader();
 
         reader.onload = (e: any) => {
-          this.profileImage = e.target.result;
+          this.imageUrl = e.target.result;
         };
 
         reader.readAsDataURL(this.currentFile);

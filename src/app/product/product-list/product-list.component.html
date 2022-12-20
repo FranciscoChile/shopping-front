@@ -1,10 +1,19 @@
-<div class="container mb-4 mt-4">
-    <button type="button" class="btn bd-indigo-200" [routerLink]="['/product/add']">
-      Agregar
-    </button>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-2">
+      <h1>
+        Productos
+      </h1>    
+    </div>
+    <div class="col-10">
+      <button type="button" class="btn bd-indigo-200" [routerLink]="['/product/add']">
+        +
+      </button>  
+    </div>
   </div>
+</div>
   
-  <div class="container mt-5 mb-4">
+  <div class="container mb-4">
     <div class="form-group">
       <input
         type="text"
@@ -26,9 +35,9 @@
           };">
     
           <div class="card" >     
-            <img [src]="c.profileImg" style="height: 180px;">                 
+            <img [src]="c.imageUrl" style="height: 180px;">                 
             <div class="card-body p-2">
-              <h5 class="titleh5 mb-0">{{c.name}}</h5>
+              <h5 class="title mb-0">{{c.name}}</h5>
               <p class="card-text mb-0"><small class="text-muted">Precio: {{c.priceList}}</small></p>
             </div>
             <div class="card-footer">
