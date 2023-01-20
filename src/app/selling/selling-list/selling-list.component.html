@@ -1,8 +1,8 @@
 <div class="container-fluid mb-4" style="width: 95%;">
 
   <div class="d-flex flex-row mb-3 justify-content-between">
-    <div class="p-2 fs-3">Tienda</div>
-    <div class="p-2 w-75">
+    <div class="p-2 fs-3" style="line-height: 38px;">Tienda</div>
+    <div class="p-2 w-50">
       <div class="form-group">
         <input
           type="text"
@@ -13,8 +13,27 @@
       </div>
     </div>
     <div class="p-2">
-      <button type="button" class="btn bd-indigo-200 me-2" [routerLink]="['/cart']" >
-        <i class="bi bi-cart" style="font-size: 18px; color: black"></i>{{cartItems.length}}
+      <button type="button" class="btn  me-2"  >        
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-circle" width="36" height="36" viewBox="0 0 24 24" stroke-width="1" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <circle cx="12" cy="12" r="9" />
+          <circle cx="12" cy="10" r="3" />
+          <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+        </svg>
+        Hola, regístrate
+      </button> 
+      
+      
+
+      <button type="button" class="btn  me-2" [routerLink]="['/cart']" >
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="36" height="36" viewBox="0 0 24 24" stroke-width="1" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <circle cx="6" cy="19" r="2" />
+          <circle cx="17" cy="19" r="2" />
+          <path d="M17 17h-11v-14h-2" />
+          <path d="M6 5l14 1l-1 7h-13" />
+        </svg>
+        <span class="red">{{cartItems.length}}</span>        
       </button>  
     </div>
   </div>

@@ -25,6 +25,8 @@ import { SellingListComponent } from './selling/selling-list/selling-list.compon
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartListComponent } from './selling/cart-list/cart-list.component';
+import { SignupComponent } from './users/signup/signup.component';
+import { LoginComponent } from './users/login/login.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { CartListComponent } from './selling/cart-list/cart-list.component';
     ProductEditComponent,
     ProductListComponent,
     SellingListComponent,
-    CartListComponent
+    CartListComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, FormsModule, 

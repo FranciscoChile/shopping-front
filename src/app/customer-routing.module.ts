@@ -6,6 +6,10 @@ import { CustomerListComponent } from './customer/customer-list/customer-list.co
 
 const routes: Routes = [
   {
+    path: 'customer',
+    redirectTo: 'customer/list',
+  },
+  {
     path: 'customer/list',
     component: CustomerListComponent
   },

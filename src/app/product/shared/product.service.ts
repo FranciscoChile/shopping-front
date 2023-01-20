@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Product } from './product';
 import { catchError } from 'rxjs/operators';
-import { CartItem } from 'src/app/selling/shared/cart-item';
 
 @Injectable({
   providedIn: 'root'
